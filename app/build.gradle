@@ -17,6 +17,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            buildConfigField "String", "OPEN_WATHER_API_KEY", "\"1867722b6af87e1d0388e10c5a94be34\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -26,7 +29,7 @@ android {
         enabled = true
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'OPEN_WATHER_API_KEY', OpenWeatherApiKey
+
     }
 
 
