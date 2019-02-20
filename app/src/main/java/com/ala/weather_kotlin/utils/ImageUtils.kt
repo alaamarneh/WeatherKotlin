@@ -9,6 +9,9 @@ object ImageUtils{
         return "http://www.geognos.com/api/en/countries/flag/$countryCode.png"
     }
 
+    /**
+     * return suitable icon by weather
+     */
     fun getImageResourceByWeather(weather: Weather): Int {
         return R.drawable.ic_sun_solid
     }

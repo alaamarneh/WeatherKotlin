@@ -1,13 +1,15 @@
-package com.ala.weather_kotlin.repo
+package com.ala.weather_kotlin.di.repo
 
-import android.text.format.DateUtils
 import com.ala.weather_kotlin.BuildConfig
+import com.ala.weather_kotlin.utils.isToday
+import com.ala.weather_kotlin.utils.isTomorrow
+import com.ala.weather_kotlin.utils.secondsToMillis
 import com.ala.weather_kotlin.model.Country
 import com.ala.weather_kotlin.model.Weather
 import com.ala.weather_kotlin.net.CountryApiHelper
 import com.ala.weather_kotlin.net.WeatherApiHelper
 import io.reactivex.Single
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,22 +27,22 @@ constructor(private val countryApiHelper: CountryApiHelper, private val weatherA
                 val weathers = ArrayList<Weather>()
                 var todayWeather: Weather? = null
                 var tomorrowWeather: Weather? = null
-                for (weather in weatherResponse.listOfWeathers!!) {
+                weatherResponse.listOfWeathers?.forEach {
+                    if (todayWeather == null && it.date.secondsToMillis().isToday()) {
+                        todayWeather = it
 
-                    if (todayWeather == null && DateUtils.isToday(weather.date * 1000)) {
-                        todayWeather = weather
-
-                    } else if (DateUtils.isToday(weather.date * 1000 - DateUtils.DAY_IN_MILLIS)) { // if tomorrow
-                        tomorrowWeather = weather
-                        break
+                    } else if (it.date.secondsToMillis().isTomorrow()) { // if tomorrow
+                        tomorrowWeather = it
+                        return@forEach
                     }
-
                 }
 
                 weathers.add(todayWeather!!)
                 weathers.add(tomorrowWeather!!)
-                weathers
+                return@map weathers
             }
     }
+
+
 }
 

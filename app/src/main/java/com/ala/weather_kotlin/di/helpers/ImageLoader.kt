@@ -1,4 +1,4 @@
-package com.ala.weather_kotlin.helpers
+package com.ala.weather_kotlin.di.helpers
 
 import android.widget.ImageView
 

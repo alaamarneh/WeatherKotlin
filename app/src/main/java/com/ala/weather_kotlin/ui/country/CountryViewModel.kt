@@ -1,11 +1,11 @@
 package com.ala.weather_kotlin.ui.country
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.ala.weather_kotlin.model.Country
+import com.ala.weather_kotlin.ui.base.BaseViewModel
 import javax.inject.Inject
 
-class CountryViewModel  @Inject constructor(): ViewModel() {
+class CountryViewModel  @Inject constructor(): BaseViewModel() {
 
     val country = MutableLiveData<Country>()
 

@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
+<layout>
+    <data>
+        <variable name="country" type="com.ala.weather_kotlin.model.Country"/>
+    </data>
 
-    <ImageView
-        android:id="@+id/flag_img"
-        android:layout_width="90dp"
-        android:layout_height="50dp" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_marginStart="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <ImageView
+            android:flag="@{country.countryCode}"
+            android:id="@+id/flag_img"
+            android:layout_width="90dp"
+            android:layout_height="50dp" />
 
-        <TextView
-            android:id="@+id/country_name_tv"
+        <LinearLayout
+            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            tools:text="county name" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/region_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            tools:text="region" />
+            <TextView
+                android:text="@{country.name}"
+                android:id="@+id/country_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                tools:text="county name" />
+
+            <TextView
+                android:text="@{country.region}"
+                android:id="@+id/region_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                tools:text="region" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>

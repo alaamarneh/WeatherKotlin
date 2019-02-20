@@ -1,10 +1,12 @@
-package com.ala.weather_kotlin.helpers
+package com.ala.weather_kotlin.di.helpers
 
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ImageLoaderImpl @Inject
 constructor(private val context: Context) : ImageLoader {
 

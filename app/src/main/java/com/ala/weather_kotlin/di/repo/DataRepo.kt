@@ -1,4 +1,4 @@
-package com.ala.weather_kotlin.repo
+package com.ala.weather_kotlin.di.repo
 
 import com.ala.weather_kotlin.model.Country
 import com.ala.weather_kotlin.model.Weather

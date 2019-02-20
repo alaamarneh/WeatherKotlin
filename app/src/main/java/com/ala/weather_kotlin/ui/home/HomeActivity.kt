@@ -60,9 +60,8 @@ class HomeActivity : AppCompatActivity(), CountriesAdapter.CountriesAdapterListe
 
         mBinding.countriesRv.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
         mViewModel.countriesLiveData
-            .observe(this, Observer { response: List<Country>? ->
-                Log.d("tag", "observe data" + response!!.size)
-                val adapter = CountriesAdapter(response, this)
+            .observe(this, Observer { response ->
+                val adapter = CountriesAdapter(response!!, this)
                 mBinding.countriesRv.adapter = adapter
             }
             )
