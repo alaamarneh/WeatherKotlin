@@ -3,11 +3,11 @@
 
     <data>
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
 
         <variable
             name="viewModel"
-            type="com.ala.weather_kotlin.ui.home.HomeViewModel" />
+            type="com.ala.weather_kotlin.ui.home.HomeViewModel"/>
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
             android:id="@+id/content"
             layout="@layout/app_bar_home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -40,18 +40,18 @@
                 <include
                     layout="@layout/nav_header_home"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
 
                 <ProgressBar
                     android:id="@+id/loading_pb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/countriesRv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
         </com.google.android.material.navigation.NavigationView>

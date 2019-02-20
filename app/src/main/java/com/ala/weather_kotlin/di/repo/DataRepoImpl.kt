@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @Singleton
 class DataRepoImpl @Inject
 constructor(private val countryApiHelper: CountryApiHelper, private val weatherApiHelper: WeatherApiHelper) : DataRepo {
+
     override fun getAllCountries(): Single<List<Country>> {
         return countryApiHelper.getAllCountries()
     }
