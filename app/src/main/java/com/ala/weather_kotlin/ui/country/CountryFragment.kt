@@ -14,29 +14,32 @@ import com.ala.weather_kotlin.R
 import com.ala.weather_kotlin.databinding.FragmentCountryDetailsBinding
 import com.ala.weather_kotlin.di.helpers.ImageLoader
 import com.ala.weather_kotlin.model.Country
+import com.ala.weather_kotlin.ui.base.BaseFragment
 import com.ala.weather_kotlin.utils.ImageUtils
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class CountryFragment : Fragment() {
+class CountryFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentCountryDetailsBinding
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-    private lateinit var mViewModel: CountryViewModel
-
     @Inject
     lateinit var mImageLoader: ImageLoader
+
+    private lateinit var mViewModel: CountryViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_country_details, container, false)
         mViewModel = ViewModelProviders
             .of(this, factory)
             .get(CountryViewModel::class.java)
-        mBinding.viewModel = mViewModel
-        mBinding.lifecycleOwner = this
+        with(mBinding){
+            viewModel = mViewModel
+            lifecycleOwner = this@CountryFragment
+        }
 
         mViewModel.country
             .observe(this, Observer {

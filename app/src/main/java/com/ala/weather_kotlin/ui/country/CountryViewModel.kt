@@ -10,6 +10,6 @@ class CountryViewModel  @Inject constructor(): BaseViewModel() {
     val country = MutableLiveData<Country>()
 
     fun setCountry(country: Country) {
-        this.country.setValue(country)
+        this.country.value = country
     }
 }

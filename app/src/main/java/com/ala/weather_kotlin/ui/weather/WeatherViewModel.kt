@@ -1,29 +1,17 @@
 package com.ala.weather_kotlin.ui.weather
 
 import androidx.lifecycle.MutableLiveData
-import com.ala.weather_kotlin.model.Weather
 import com.ala.weather_kotlin.di.repo.DataRepo
+import com.ala.weather_kotlin.model.Weather
 import com.ala.weather_kotlin.ui.base.BaseViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class WeatherViewModel @Inject constructor(private val dataRepo: DataRepo) : BaseViewModel() {
 
     val weatherLiveData = MutableLiveData<List<Weather>>()
-    val isLoading = MutableLiveData<Boolean>()
 
     fun loadWeatherData(lat: Double, lng: Double) {
-        isLoading.value = true
-        disposable.add(dataRepo.getWeather(lat, lng)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data ->
-                weatherLiveData.value = data
-                isLoading.value = false
-            }
-        )
+        addDisposable(dataRepo.getWeather(lat, lng)
+            .subscribeWithLoading(onSuccess = { weatherLiveData.value = it }))
     }
-
-
 }

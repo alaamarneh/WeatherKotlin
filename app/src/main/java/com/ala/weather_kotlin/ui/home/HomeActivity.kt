@@ -24,10 +24,10 @@ import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), CountriesAdapter.CountriesAdapterListener {
 
-    lateinit var mBinding: ActivityHomeBinding
-
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+
+    lateinit var mBinding: ActivityHomeBinding
 
     override fun onCountryClicked(country: Country) {
         mBinding.drawerLayout.closeDrawers()
@@ -45,12 +45,14 @@ class HomeActivity : AppCompatActivity(), CountriesAdapter.CountriesAdapterListe
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-
         setSupportActionBar(toolbar)
         mViewModel = ViewModelProviders
             .of(this, factory)
             .get(HomeViewModel::class.java)
-        mBinding.viewModel = mViewModel
+        with(mBinding){
+            viewModel = mViewModel
+            lifecycleOwner = this@HomeActivity
+        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -58,7 +60,7 @@ class HomeActivity : AppCompatActivity(), CountriesAdapter.CountriesAdapterListe
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        mBinding.countriesRv.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
+        mBinding.countriesRv.layoutManager = LinearLayoutManager(this)
         mViewModel.countriesLiveData
             .observe(this, Observer { response ->
                 val adapter = CountriesAdapter(response!!, this)
