@@ -62,8 +62,8 @@ class HomeActivity : AppCompatActivity(), CountriesAdapter.CountriesAdapterListe
 
         mBinding.countriesRv.layoutManager = LinearLayoutManager(this)
         mViewModel.countriesLiveData
-            .observe(this, Observer { response ->
-                val adapter = CountriesAdapter(response!!, this)
+            .observe(this, Observer {
+                val adapter = CountriesAdapter(it, this)
                 mBinding.countriesRv.adapter = adapter
             }
             )
